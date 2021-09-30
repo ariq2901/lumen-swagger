@@ -1,0 +1,1054 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dokumentasi Kece",
+        "description": "Dokumentasi endpoint lumen - swagger",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/kabupaten": {
+            "get": {
+                "tags": [
+                    "Kabupaten"
+                ],
+                "summary": "Get List Kabupaten",
+                "operationId": "getKabupaten",
+                "responses": {
+                    "200": {
+                        "description": "Returns all area data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "kabupaten": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "kabupaten_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "provinsi": {
+                                                        "properties": {
+                                                            "provinsi_id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string"
+                                                },
+                                                "last": {
+                                                    "type": "string"
+                                                },
+                                                "prev": {
+                                                    "type": "string"
+                                                },
+                                                "next": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer"
+                                                },
+                                                "from": {
+                                                    "type": "integer"
+                                                },
+                                                "last_page": {
+                                                    "type": "integer"
+                                                },
+                                                "path": {
+                                                    "type": "string"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer"
+                                                },
+                                                "to": {
+                                                    "type": "integer"
+                                                },
+                                                "total": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/kabupaten/{kabupaten_id}": {
+            "get": {
+                "tags": [
+                    "Kabupaten"
+                ],
+                "summary": "Get Kabupaten Data By ID",
+                "operationId": "/kabupaten/kabupatenId",
+                "parameters": [
+                    {
+                        "name": "kabupaten_id",
+                        "in": "path",
+                        "description": "The id of kabupaten",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show kabupaten data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "kabupaten_id": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "provinsi": {
+                                            "properties": {
+                                                "provinsi_id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Kabupaten Not Found"
+                    }
+                }
+            }
+        },
+        "/api/create-kabupaten": {
+            "post": {
+                "tags": [
+                    "Kabupaten"
+                ],
+                "summary": "Create New Kabupaten",
+                "operationId": "createKabupaten",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateKabupatenRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/CreateKabupatenResult"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/update-kabupaten/{kabupaten_id}": {
+            "put": {
+                "tags": [
+                    "Kabupaten"
+                ],
+                "summary": "Update Kabupaten",
+                "operationId": "updateKabupaten",
+                "parameters": [
+                    {
+                        "name": "kabupaten_id",
+                        "in": "path",
+                        "description": "The id of kabupaten",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateKabupatenRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/UpdateKabupatenResult"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/delete-kabupaten/{kabupaten_id}": {
+            "delete": {
+                "tags": [
+                    "Kabupaten"
+                ],
+                "summary": "Delete Kabupaten",
+                "operationId": "deleteKabupaten",
+                "parameters": [
+                    {
+                        "name": "kabupaten_id",
+                        "in": "path",
+                        "description": "The id of kabupaten",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/provinsi": {
+            "get": {
+                "tags": [
+                    "Provinsi"
+                ],
+                "summary": "Get List of Provinsi",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Returns all area data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "provinsi_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "list_kabupaten": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "kabupaten_id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string"
+                                                },
+                                                "last": {
+                                                    "type": "string"
+                                                },
+                                                "prev": {
+                                                    "type": "string"
+                                                },
+                                                "next": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer"
+                                                },
+                                                "from": {
+                                                    "type": "integer"
+                                                },
+                                                "last_page": {
+                                                    "type": "integer"
+                                                },
+                                                "path": {
+                                                    "type": "string"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer"
+                                                },
+                                                "to": {
+                                                    "type": "integer"
+                                                },
+                                                "total": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/create-provinsi": {
+            "post": {
+                "tags": [
+                    "Provinsi"
+                ],
+                "summary": "Create New Provinsi",
+                "operationId": "createProvinsi",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateProvinsi"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/CreateProvinsiResult"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/provinsi/{provinsi_id}": {
+            "get": {
+                "tags": [
+                    "Provinsi"
+                ],
+                "summary": "Get Provinsi By ID",
+                "operationId": "/provinsi/provinsiId",
+                "parameters": [
+                    {
+                        "name": "provinsi_id",
+                        "in": "path",
+                        "description": "The id of provinsi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show Provinsi data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "provinsi_id": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "list_kabupaten": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "kabupaten_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Something went wrong..."
+                    }
+                }
+            }
+        },
+        "/api/update-provinsi/{provinsi_id}": {
+            "put": {
+                "tags": [
+                    "Provinsi"
+                ],
+                "summary": "Update Provinsi",
+                "operationId": "updateProvinsi",
+                "parameters": [
+                    {
+                        "name": "provinsi_id",
+                        "in": "path",
+                        "description": "The id of provinsi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProvinsiRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/UpdateProvinsiResult"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/delete-provinsi/{provinsi_id}": {
+            "delete": {
+                "tags": [
+                    "Provinsi"
+                ],
+                "summary": "Delete Provinsi",
+                "operationId": "deleteProvinsi",
+                "parameters": [
+                    {
+                        "name": "provinsi_id",
+                        "in": "path",
+                        "description": "The id of provinsi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Create user",
+                "description": "Register new user",
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Ariq Jusuf",
+                                    "email": "ariq2901@gmail.com",
+                                    "password": "passworKu"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/RegisterResult"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/oauth/token": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login user",
+                "description": "User Login",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "grant_type": {
+                                        "type": "string"
+                                    },
+                                    "client_id": {
+                                        "type": "integer"
+                                    },
+                                    "client_secret": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "username": "ariq2901@gmail.com",
+                                    "password": "passwordKu",
+                                    "grant_type": "password",
+                                    "client_id": 2,
+                                    "client_secret": "9ismoDyOkW9SKTcJBkznYpqo6swIMp7IaQecza8e"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/LoginResult"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Logout",
+                "description": "Logout & Revoke User Token",
+                "operationId": "/logout",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/profile": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get Profile",
+                "description": "Get User Profile",
+                "operationId": "profile",
+                "responses": {
+                    "200": {
+                        "description": "Get User Data.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateProvinsi": {
+                "title": "Create Provinsi Schema",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateProvinsiResult": {
+                "title": "Response Create Provinsi",
+                "properties": {
+                    "error": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {
+                            "provinsi_id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProvinsiRequest": {
+                "title": "Create Provinsi Schema",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProvinsiResult": {
+                "title": "Response Update Porvinsi",
+                "properties": {
+                    "error": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateKabupatenRequest": {
+                "title": "Create Kabupaten Schema",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "provinsi_id": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateKabupatenResult": {
+                "title": "Response Create Kabupaten",
+                "properties": {
+                    "error": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {
+                            "kabupaten_id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "provinsi": {
+                                "properties": {
+                                    "provinsi_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "pbject"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateKabupatenRequest": {
+                "title": "Create Kabupaten Schema",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "provinsi_id": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateKabupatenResult": {
+                "title": "Response Update Porvinsi",
+                "properties": {
+                    "error": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "provinsi_id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterResult": {
+                "title": "Register Schema",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "token": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "example": {
+                    "message": "successfully registered",
+                    "user": {
+                        "name": "ariq jusuf",
+                        "email": "ariq2901@gmail.com",
+                        "updated_at": "2021-07-14T02:43:30.000000Z",
+                        "created_at": "2021-07-14T02:43:30.000000Z",
+                        "id": 2
+                    },
+                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzdi"
+                }
+            },
+            "LoginResult": {
+                "title": "Login Schema",
+                "properties": {
+                    "token_type": {
+                        "type": "string"
+                    },
+                    "expires_in": {
+                        "type": "integer"
+                    },
+                    "access_token": {
+                        "type": "string"
+                    },
+                    "refresh_token": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "example": {
+                    "token": "Bearer",
+                    "expires_in": 31536000,
+                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzdiNDgzNGZlNzBhODNjMTdiOTllZDgwNGVkZDU5ZDRmNGM3MTI5MTUyYTQxZjVmOTgxNTkxNzhiMjFkOGNmMThmNDE2ZDFiZjRlOTZhZDgiLCJpYXQiOjE2MjYyMzA2MTEsIm5iZiI6MTYyNjIzMDYxMSwiZXhwIjoxNjU3NzY2NjEwLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.ws9EZVWvWlznzvU4sLMh1n_nEQVH4B-Wr4hBS5ejBrp7eham8fNNLGZpmgp8ipt10N-IQE_kL8Oov-gWRJ4Eyrllz66K-wiCmkv3KciU5tYc1rg9AozlpnQvMmcEqi8UyFYGOfUw8dxlhczMCjDt3QUu36JAO7yRNY-mXLBMNE3KIxag7_J6vQ-Wadx1HpAMiiDCWQfRr4PJlYIfKJQrfY_4GFADlKSM4VcLqcDN8Tvq6gu5RWFVvavr8WGcorvB9AKLTYVFPQxlzcJH6GtaZ95qxF5vKiIMZxUjx77zTbHdZRINAuejYqCn8fDSXlq-qrGnMwI57jdHF7EajXAXoZ6N8MXFbeiiDTpDEh_Z55RawR4ngAkPMBXOZFX32q6VnpT6BkyE4HkOawNmIurS3peEnSjpz1joikrcd5L6BsGB2eDULqK4WNLcDcdUtOjT_JkhXvZF8mGMO95-43lUL2O81zrpl5YvI0Rebiqz8jRM4wTd7CeW3fMGSyEvdYsfde6C7VT2R7mz3uLN76Cy0nTMfcuBv7D5nY-YNBJqdrw0TJGOP8N64fmOd9azsh2hMZayDeNE1BcEjv4I6MDsgTHWkDBgYN_YjcE8zZswiUsqyqNALw4WLQVZ9Ir0ov8rAUCdFU3hjFIMTgzHla1x2pkgTLaz1MkGoT3pp_pT6gY",
+                    "refresh_token": "def50200cca226564ded2d2110a9333f54ab67418677c4d55e815c75c0cb4edfc317f4ecc32162d66d53f4db033afc5f8ca27630096b34de28f718a9686cecea010eb67d740391db124ceaa43fa39a69d555fa63cd6d6c5a5e1951a047ee8bf3529e4fadbd0c27ca1fd9badaf46e8890b739d09264526dd07f4593456343e8fcbd7de287c168aedd7b70ddeaad4793"
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Projects",
+            "description": "API Endpoints of Projects"
+        }
+    ]
+}
